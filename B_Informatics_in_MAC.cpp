@@ -1,0 +1,88 @@
+// Warning: Coding is an addiction.
+
+#include <bits/stdc++.h>
+#include <ext/pb_ds/tree_policy.hpp>
+#include <ext/pb_ds/assoc_container.hpp>
+
+using namespace std;
+using namespace __gnu_pbds;
+
+#define F first
+#define S second
+#define dbl double
+#define pb push_back
+#define ll long long int
+#define uset unordered_set
+#define umap unordered_map
+long long int mod = 1000000007;
+#define all(x) x.begin(), x.end()
+#define Pi 3.1415926535897932384626
+
+#define vin(v) for(auto &z: v)cin >> z
+#define deb(v) cout << #v << " = " << v <<  endl
+#define vout(v) for(auto z:v)cout << z << " " ; cout<<endl
+#define deb2(v, k) cout << #v << " = " << v << " "<< #k << " = " << k << endl;
+#define pout(mp) for(auto z: mp)cout << z.F << " " << z.S << endl
+
+typedef tree<long long int, null_type, less<long long int>, rb_tree_tag, tree_order_statistics_node_update>sat;
+typedef tree<long long int, null_type, less_equal<long long int>, rb_tree_tag, tree_order_statistics_node_update>multisat;
+
+void HHM() {
+    ll  n, i, j, k;
+    cin >> n;
+    vector<ll> v(n); vin(v);
+
+
+    map<ll, ll> mp;
+    for (auto x : v) mp[x]++;
+
+    ll mex = 0;
+
+    for (mex = 0; mex <= n + 1; mex++) {
+        if (mp[mex] == 1) {
+            cout << "-1\n"; return;
+        }
+        if (mp[mex] == 0) break;
+    }
+
+    if (mex == 0) {
+        cout << n << endl;
+        for (i = 1;i <= n; i++) {
+            cout << i << " " << i << endl;
+        }
+        return;
+    }
+
+    ll l = 0;
+
+    set<ll>s;
+
+    for (i = 0; i < n; i++) {
+        if (v[i] < mex) s.insert(v[i]);
+        if (s.size() == mex) break;
+    }
+
+    ll r = i;
+    s.clear();
+
+    for (i = r + 1; i < n; i++) {
+        if (v[i] < mex) s.insert(v[i]);
+    }
+
+    if (s.size() != mex) {
+        cout << -1 << endl; return;
+    }
+
+    cout << 2 << endl;
+    cout << l + 1 << " " << r + 1 << endl;
+    cout << r + 2 << " " << n << endl;
+}
+
+int main() {
+    ios_base::sync_with_stdio(0), cin.tie(0);
+    // freopen("input.txt", "r", stdin); 
+    // freopen("output.txt", "w", stdout);
+    ll t = 1;
+    cin >> t;
+    while (t--) { HHM(); }
+}
